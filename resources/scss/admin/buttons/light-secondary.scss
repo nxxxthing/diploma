@@ -1,0 +1,45 @@
+.btn-light-secondary {
+    color: #FFFFFF;
+    background-color: #3577F1;
+    border-color: #3577F1;
+}
+
+.btn-light-secondary:hover,
+.btn-light-secondary:focus,
+.btn-light-secondary:active,
+.btn-light-secondary.active,
+.open .dropdown-toggle.btn-light-secondary {
+    color: #FFFFFF;
+    background-color: #3577F1;
+    border-color: #3577F1;
+}
+
+.btn-light-secondary:active,
+.btn-light-secondary.active,
+.open .dropdown-toggle.btn-light-secondary {
+    background-image: none;
+}
+
+.btn-light-secondary.disabled,
+.btn-light-secondary[disabled],
+fieldset[disabled] .btn-light-secondary,
+.btn-light-secondary.disabled:hover,
+.btn-light-secondary[disabled]:hover,
+fieldset[disabled] .btn-light-secondary:hover,
+.btn-light-secondary.disabled:focus,
+.btn-light-secondary[disabled]:focus,
+fieldset[disabled] .btn-light-secondary:focus,
+.btn-light-secondary.disabled:active,
+.btn-light-secondary[disabled]:active,
+fieldset[disabled] .btn-light-secondary:active,
+.btn-light-secondary.disabled.active,
+.btn-light-secondary[disabled].active,
+fieldset[disabled] .btn-light-secondary.active {
+    background-color: #3577F1;
+    border-color: #3577F1;
+}
+
+.btn-light-secondary .badge {
+    color: #3577F1;
+    background-color: #FFFFFF;
+}

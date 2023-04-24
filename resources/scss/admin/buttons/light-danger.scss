@@ -1,0 +1,45 @@
+.btn-light-danger {
+    color: #FFFFFF;
+    background-color: #F06548;
+    border-color: #F06548;
+}
+
+.btn-light-danger:hover,
+.btn-light-danger:focus,
+.btn-light-danger:active,
+.btn-light-danger.active,
+.open .dropdown-toggle.btn-light-danger {
+    color: #FFFFFF;
+    background-color: #F06548;
+    border-color: #F06548;
+}
+
+.btn-light-danger:active,
+.btn-light-danger.active,
+.open .dropdown-toggle.btn-light-danger {
+    background-image: none;
+}
+
+.btn-light-danger.disabled,
+.btn-light-danger[disabled],
+fieldset[disabled] .btn-light-danger,
+.btn-light-danger.disabled:hover,
+.btn-light-danger[disabled]:hover,
+fieldset[disabled] .btn-light-danger:hover,
+.btn-light-danger.disabled:focus,
+.btn-light-danger[disabled]:focus,
+fieldset[disabled] .btn-light-danger:focus,
+.btn-light-danger.disabled:active,
+.btn-light-danger[disabled]:active,
+fieldset[disabled] .btn-light-danger:active,
+.btn-light-danger.disabled.active,
+.btn-light-danger[disabled].active,
+fieldset[disabled] .btn-light-danger.active {
+    background-color: #F06548;
+    border-color: #F06548;
+}
+
+.btn-light-danger .badge {
+    color: #F06548;
+    background-color: #FFFFFF;
+}

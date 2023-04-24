@@ -1,0 +1,45 @@
+.btn-light-dark {
+    color: #FFFFFF;
+    background-color: #424649;
+    border-color: #424649;
+}
+
+.btn-light-dark:hover,
+.btn-light-dark:focus,
+.btn-light-dark:active,
+.btn-light-dark.active,
+.open .dropdown-toggle.btn-light-dark {
+    color: #FFFFFF;
+    background-color: #424649;
+    border-color: #424649;
+}
+
+.btn-light-dark:active,
+.btn-light-dark.active,
+.open .dropdown-toggle.btn-light-dark {
+    background-image: none;
+}
+
+.btn-light-dark.disabled,
+.btn-light-dark[disabled],
+fieldset[disabled] .btn-light-dark,
+.btn-light-dark.disabled:hover,
+.btn-light-dark[disabled]:hover,
+fieldset[disabled] .btn-light-dark:hover,
+.btn-light-dark.disabled:focus,
+.btn-light-dark[disabled]:focus,
+fieldset[disabled] .btn-light-dark:focus,
+.btn-light-dark.disabled:active,
+.btn-light-dark[disabled]:active,
+fieldset[disabled] .btn-light-dark:active,
+.btn-light-dark.disabled.active,
+.btn-light-dark[disabled].active,
+fieldset[disabled] .btn-light-dark.active {
+    background-color: #424649;
+    border-color: #424649;
+}
+
+.btn-light-dark .badge {
+    color: #424649;
+    background-color: #FFFFFF;
+}

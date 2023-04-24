@@ -1,0 +1,45 @@
+.btn-light-warning {
+    color: #ffffff;
+    background-color: #F7B84B;
+    border-color: #F7B84B;
+}
+
+.btn-light-warning:hover,
+.btn-light-warning:focus,
+.btn-light-warning:active,
+.btn-light-warning.active,
+.open .dropdown-toggle.btn-light-warning {
+    color: #ffffff;
+    background-color: #f7b84b;
+    border-color: #F7B84B;
+}
+
+.btn-light-warning:active,
+.btn-light-warning.active,
+.open .dropdown-toggle.btn-light-warning {
+    background-image: none;
+}
+
+.btn-light-warning.disabled,
+.btn-light-warning[disabled],
+fieldset[disabled] .btn-light-warning,
+.btn-light-warning.disabled:hover,
+.btn-light-warning[disabled]:hover,
+fieldset[disabled] .btn-light-warning:hover,
+.btn-light-warning.disabled:focus,
+.btn-light-warning[disabled]:focus,
+fieldset[disabled] .btn-light-warning:focus,
+.btn-light-warning.disabled:active,
+.btn-light-warning[disabled]:active,
+fieldset[disabled] .btn-light-warning:active,
+.btn-light-warning.disabled.active,
+.btn-light-warning[disabled].active,
+fieldset[disabled] .btn-light-warning.active {
+    background-color: #F7B84B;
+    border-color: #F7B84B;
+}
+
+.btn-light-warning .badge {
+    color: #F7B84B;
+    background-color: #ffffff;
+}

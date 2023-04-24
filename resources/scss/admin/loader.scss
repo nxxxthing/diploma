@@ -1,0 +1,31 @@
+.__outer_loader {
+    display: none;
+    position: fixed;
+    z-index: 99991;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(239,239,240,0.2);
+    backdrop-filter: blur(5px);
+}
+.loader {
+    position: fixed;
+    z-index: 99991;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 0 16px;
+    border: 16px solid #80c0ff; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

@@ -1,0 +1,144 @@
+.select2-container--default .select2-selection--multiple .select2-selection__choice{
+    margin-right: 0!important;
+    margin-top: 0!important;
+}
+.datatable {
+    width: 100% !important;
+}
+
+.dataTables_length,
+.dataTables_filter,
+.dt-buttons {
+    margin-bottom: 0.333em;
+}
+
+.dt-buttons .btn {
+    margin-left: 0.333em;
+    border-radius: 0;
+}
+
+.table.datatable {
+    box-sizing: border-box;
+    border-collapse: collapse;
+}
+
+table.dataTable thead th {
+    border-bottom: 2px solid #dee2e6;
+}
+
+.dataTables_wrapper.no-footer .dataTables_scrollBody {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.select2 {
+    max-width: 100%;
+    width: 100%;
+}
+
+table.dataTable thead .sorting,
+table.dataTable thead .sorting_asc,
+table.dataTable thead .sorting_desc {
+    background-image: none;
+}
+
+.btn-group-xs > .btn,
+.btn-xs {
+    padding: 1px 5px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+
+.message-container {
+    position: fixed;
+    bottom: 0;
+    right: 20px;
+    max-width: 400px;
+    z-index: 99999
+}
+ul
+{
+    list-style: none!important;
+}
+.content li+li
+{
+    margin: 0!important;
+}
+.error
+{
+    color: red;
+}
+
+.message{
+    margin-left: auto;
+}
+
+.color-pick .select2-selection {
+    padding: 0 !important;
+}
+
+.clickable-card {
+    cursor: pointer;
+}
+
+
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #078ACDFF !important;
+}
+
+.select2-selection__choice__remove {
+    color: #ff6e9d !important;
+}
+
+.select2.select2-container.select2-container--default {
+    width: 100% !important;
+}
+
+.select2 {
+    max-width: 100%;
+    width: 100%;
+}
+
+.select2-selection.select2-selection--single {
+    height: calc(2.25rem + 2px);
+}
+
+.bottom-line-sticky {
+    position: sticky;
+    bottom: -1px;
+    transition: padding 500ms, margin 500ms, box-shadow ease-out 500ms;
+
+    &-area {
+        margin-top: 1rem;
+    }
+
+    &.is-pinned {
+        z-index: 10;
+        margin: -1rem -0.99rem 0;
+        padding: 1rem;
+        border-end-end-radius: 0.25rem;
+        border-end-start-radius: 0.25rem;
+        border-top-width: 2px;
+        border-top-style: solid;
+        background: #fff;
+        border-top-color: #343a40;
+        box-shadow: 0 0 50px #000;
+    }
+}
+
+.dark-mode .bottom-line-sticky {
+    &.is-pinned {
+        background: #343a40;
+        border-top-color: #fff;
+    }
+}
+tr td.draggable-cursor {
+    cursor: grab;
+}
+tbody:has(tr.dt-rowReorder-moving) td.draggable-cursor {
+    cursor: grabbing;
+}
+
+
+

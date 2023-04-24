@@ -1,0 +1,4 @@
+include:
+  - project: 'packages/gitlab-templates'
+    ref: master
+    file: 'templates/laravel.1.0.gitlab-ci.yml'

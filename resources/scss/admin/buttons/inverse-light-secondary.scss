@@ -1,0 +1,45 @@
+.btn-inverse-light-secondary {
+    color: #3577F1;
+    background-color: #FFFFFF;
+    border-color: #3577F1;
+}
+
+.btn-inverse-light-secondary:hover,
+.btn-inverse-light-secondary:focus,
+.btn-inverse-light-secondary:active,
+.btn-inverse-light-secondary.active,
+.open .dropdown-toggle.btn-inverse-light-secondary {
+    color: #3577F1;
+    background-color: #FFFFFF;
+    border-color: #3577F1;
+}
+
+.btn-inverse-light-secondary:active,
+.btn-inverse-light-secondary.active,
+.open .dropdown-toggle.btn-inverse-light-secondary {
+    background-image: none;
+}
+
+.btn-inverse-light-secondary.disabled,
+.btn-inverse-light-secondary[disabled],
+fieldset[disabled] .btn-inverse-light-secondary,
+.btn-inverse-light-secondary.disabled:hover,
+.btn-inverse-light-secondary[disabled]:hover,
+fieldset[disabled] .btn-inverse-light-secondary:hover,
+.btn-inverse-light-secondary.disabled:focus,
+.btn-inverse-light-secondary[disabled]:focus,
+fieldset[disabled] .btn-inverse-light-secondary:focus,
+.btn-inverse-light-secondary.disabled:active,
+.btn-inverse-light-secondary[disabled]:active,
+fieldset[disabled] .btn-inverse-light-secondary:active,
+.btn-inverse-light-secondary.disabled.active,
+.btn-inverse-light-secondary[disabled].active,
+fieldset[disabled] .btn-inverse-light-secondary.active {
+    background-color: #FFFFFF;
+    border-color: #3577F1;
+}
+
+.btn-inverse-light-secondary .badge {
+    color: #FFFFFF;
+    background-color: #3577F1;
+}
