@@ -32,9 +32,9 @@ class AuthController extends Controller
         $allowedRoles = UserRoles::getAdmins();
 
         $user = User::where('email', $email)
-            ->whereHas('roles', fn ($q) =>
+            ->whereHas('role', fn ($q) =>
                 $q->whereIn('slug', $allowedRoles))
-            ->with('roles')->first();
+            ->with('role')->first();
 
         if (!$user) {
             $errors = new MessageBag(['email' => ['These credentials do not match our records.']]);

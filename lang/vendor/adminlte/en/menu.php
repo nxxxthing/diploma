@@ -25,5 +25,11 @@ return [
     'admins'                        => 'Administrators',
     'admin'                         => 'Administrators',
     'system'                        => 'System',
-    'modules'                       => 'Modules'
+    'modules'                       => 'Modules',
+    'student'                       => 'Students',
+    'teacher'                       => 'Teachers',
+    'university'                    => 'University',
+    'faculties'                     => 'Faculties',
+    'cathedras'                     => 'Cathedras',
+    'groups'                        => 'Groups',
 ];

@@ -78,6 +78,24 @@ class PermissionSeeder extends BaseSeeder
             ->syncModule()
             ->clear();
 
+        Permissions::createModule(UserRoles::STUDENT->value, [
+                'en' => 'Student',
+                'ua' => 'Студент',
+            ])
+            ->for($admin)
+            ->except(['create', 'edit', 'delete', 'show'])
+            ->syncModule()
+            ->clear();
+
+        Permissions::createModule(UserRoles::TEACHER->value, [
+                'en' => 'Teacher',
+                'ua' => 'Викладач',
+            ])
+            ->for($admin)
+            ->except(['create', 'edit', 'delete', 'show'])
+            ->syncModule()
+            ->clear();
+
 
         Permissions::createModule('modules', [
                 'en' => 'Criteria',
@@ -90,6 +108,30 @@ class PermissionSeeder extends BaseSeeder
         Permissions::createModule('variables', [
             'en' => 'Variables',
             'ua' => 'Змінні',
+        ])
+            ->for($admin)
+            ->syncModule()
+            ->clear();
+
+        Permissions::createModule('faculties', [
+            'en' => 'Faculties',
+            'ua' => 'Факультети',
+        ])
+            ->for($admin)
+            ->syncModule()
+            ->clear();
+
+        Permissions::createModule('cathedras', [
+            'en' => 'Cathedra',
+            'ua' => 'Кафедра',
+        ])
+            ->for($admin)
+            ->syncModule()
+            ->clear();
+
+        Permissions::createModule('groups', [
+            'en' => 'Groups',
+            'ua' => 'Групи',
         ])
             ->for($admin)
             ->syncModule()

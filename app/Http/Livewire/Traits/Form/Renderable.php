@@ -9,10 +9,12 @@ trait Renderable
     public function render(): string
     {
         return <<<blade
-            <div>
+            <div id="test">
                 <form wire:submit.prevent="submit">
                     {{ \$this->form }}
                 </form>
+                {{ \$this->modal }}
+
             </div>
         blade;
     }

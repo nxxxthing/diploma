@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Users;
 
+use App\Api\v1\Enums\UserRoles;
 use App\Http\Livewire\Traits\Table\Renderable;
 use App\Models\User;
 use Filament\Tables;
@@ -13,6 +14,7 @@ use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -20,10 +22,11 @@ class UserList extends Component implements Tables\Contracts\HasTable
 {
     use InteractsWithTable;
     use Renderable;
+    public $type;
 
     protected function getTableQuery(): Builder
     {
-        return User::query()->with('roles');
+        return User::query()->with('role')->whereRole($this->type);
     }
 
     protected function getTableColumns(): array
@@ -33,15 +36,19 @@ class UserList extends Component implements Tables\Contracts\HasTable
                 ->sortable()
                 ->label(__('admin_labels.id')),
 
-            TextColumn::make('name')
+            TextColumn::make('full_name')
+                ->sortable(['first_name', 'last_name'])
+                ->searchable(['first_name', 'last_name'])
                 ->label(__('admin_labels.name')),
 
             TextColumn::make('email')
+                ->sortable()
+                ->searchable()
                 ->label(__('admin_labels.email')),
 
             TextColumn::make('roles')
                 ->getStateUsing(function (User $record) {
-                    return implode(',', $record->roles->pluck('title')->toArray());
+                    return $record->role?->title;
                 })
                 ->color('primary')
                 ->label(__('admin_labels.roles'))
@@ -52,15 +59,15 @@ class UserList extends Component implements Tables\Contracts\HasTable
     {
         return [
             Action::make('edit')
-                ->url(fn (User $record): string => route('admin.users.edit', $record))
+                ->url(fn (User $record): string => route('admin.users.edit', ['type' => $this->type, 'user' => $record]))
                 ->button()
                 ->label(__('admin_labels.edit')),
 
             DeleteAction::make()->button()
                 ->label(__('admin_labels.delete'))
                 ->modalHeading(function () {
-                    return __('admin_labels.are_you_sure_you_wont_to_delete_this_user');
-                })
+                    return __('admin_labels.delete_record');
+                })->hidden(fn (Model $record) => $record->id == auth('web')->id())
         ];
     }
 
@@ -72,5 +79,11 @@ class UserList extends Component implements Tables\Contracts\HasTable
                 ->deselectRecordsAfterCompletion()
                 ->label(__('admin_labels.delete'))
         ];
+    }
+
+    public function isTableRecordSelectable(): ?\Closure
+    {
+
+        return fn (Model $record): bool => $record->id != auth('web')->id();
     }
 }

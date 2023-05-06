@@ -199,4 +199,8 @@ return [
     'are_you_sure_you_wont_to_delete_this_module' => 'Delete module',
     'available_roles' => 'Available roles',
     'selected_roles'  => 'Selected roles',
+    'delete_record' => 'Delete this record?',
+    'first_name' => 'First Name',
+    'last_name' => 'Last Name',
+    'teacher' => 'Teacher',
 ];

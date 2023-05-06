@@ -4,50 +4,47 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Backend;
 
-use App\Api\v1\Enums\UserRoles;
-use App\Models\User;
+
+use App\Models\Group;
 use App\Http\Controllers\Controller;
 
-class UserController extends Controller
+class GroupsController extends Controller
 {
-    public string $module = 'users';
+    public string $module = 'groups';
 
-    public function index($type = "")
+    public function index()
     {
 
         abort_unless(\Gate::allows($this->module . '_access'), 403);
 
         $data['module'] = $this->module;
-        $data['type'] = $type;
 
         return view('admin.view.' . $this->module . '.index', $data);
     }
 
-    public function create($type = "")
+    public function create()
     {
         abort_unless(\Gate::allows($this->module . '_create'), 403);
 
-        $data['model'] = new User();
+        $data['model'] = new Group();
 
         $data['module'] = $this->module;
-
-        $data['type'] = $type;
 
         return view('admin.view.' . $this->module . '.create', $data);
     }
 
-    public function edit($type, User $user)
+    public function edit(Group $group)
     {
         abort_unless(\Gate::allows($this->module . '_edit'), 403);
 
-        $user->load('role');
-
         $data['module'] = $this->module;
 
-        $data['model'] = $user;
+        $data['model'] = $group->load([
+            'cathedra' => fn ($query) => $query->withTranslations()->with([
+                'faculty' => fn ($q) => $q->withTranslations()
+            ])
+        ]);
 
-        $data['type'] = $type;
-
-        return view('admin.view.' . $this->module . '.edit', compact('user'), $data);
+        return view('admin.view.' . $this->module . '.edit', $data);
     }
 }

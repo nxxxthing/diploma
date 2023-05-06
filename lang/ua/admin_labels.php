@@ -201,4 +201,8 @@ return [
     'are_you_sure_you_wont_to_delete_this_module' => 'Видалити модуль',
     'available_roles' => 'Доступні',
     'selected_roles'  => 'Вибрані',
+    'delete_record' => 'Видалити цей запис?',
+    'first_name' => 'Ім\'я',
+    'last_name' => 'Прізвище',
+    'teacher' => 'Вчитель',
 ];

@@ -97,7 +97,6 @@ class Roles extends Component implements HasForms
                             )
                             ->enableSearch()
                             ->preload()
-                            ->required()
                             ->rules(['array'])
                             ->label(__('admin_labels.permissions'))
                             ->selectableLabel(__('admin_labels.available_roles'))

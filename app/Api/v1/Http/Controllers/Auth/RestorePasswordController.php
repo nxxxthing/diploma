@@ -8,7 +8,6 @@ use App\Api\v1\Http\Controllers\BaseController;
 use App\Api\v1\Http\Requests\Auth\RestorePassword;
 use App\Models\User;
 use App\Api\v1\Traits\ResetsPasswords;
-use App\Services\UserService;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
@@ -18,10 +17,6 @@ use Illuminate\Support\Str;
 class RestorePasswordController extends BaseController
 {
     use ResetsPasswords;
-
-    public function __construct(private UserService $userService)
-    {
-    }
 
     public function restore(RestorePassword $request)
     {

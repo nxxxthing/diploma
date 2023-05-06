@@ -6,28 +6,28 @@ use Illuminate\Contracts\Translation\Loader;
 
 class MixedLoader implements Loader
 {
-    
+
     /**
      * db loader
      *
      * @var Loader
      */
     protected $primaryLoader;
-    
+
     /**
      * file loader
      *
      * @var Loader
      */
     protected $secondaryLoader;
-    
+
     /**
      * All of the namespace hints.
      *
      * @var array
      */
     protected $hints = [];
-    
+
     /**
      *  Create a new mixed loader instance.
      *
@@ -39,7 +39,7 @@ class MixedLoader implements Loader
         $this->primaryLoader = $primaryLoader;
         $this->secondaryLoader = $secondaryLoader;
     }
-    
+
     /**
      * Load the messages for the given locale.
      *
@@ -56,7 +56,7 @@ class MixedLoader implements Loader
             $this->primaryLoader->load($locale, $group, $namespace)
         );
     }
-    
+
     /**
      *  Add a new namespace to the loader.
      *
@@ -70,7 +70,7 @@ class MixedLoader implements Loader
         $this->hints[$namespace] = $hint;
         $this->secondaryLoader->addNamespace($namespace, $hint);
     }
-    
+
     /**
      * Add a new JSON path to the loader.
      *
@@ -82,7 +82,7 @@ class MixedLoader implements Loader
     {
         // TODO: Implement addJsonPath() method.
     }
-    
+
     /**
      * Get an array of all the registered namespaces.
      *

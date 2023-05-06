@@ -4,7 +4,7 @@
     @can('users_create')
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
-                <a class="btn btn-success" href="{{ route('admin.users.create', ['type' => $type]) }}">
+                <a class="btn btn-success" href="{{ route("admin.{$module}.create") }}">
                     {{__('admin_labels.add')}}
                 </a>
             </div>
@@ -13,5 +13,5 @@
 @stop
 
 @section('content')
-    <livewire:users.user-list :type="$type ?? null"/>
+    <livewire:faculties.faculties-list/>
 @endsection

@@ -13,14 +13,30 @@ class RoleSeeder extends BaseSeeder
     public function run()
     {
         $data = [
-            UserRoles::ADMIN() => [
+            UserRoles::ADMIN->value => [
                 'en' => [
                     'title' => 'Admin'
                 ],
                 'ua' => [
                     'title' => 'Адміністратор',
                 ]
-            ]
+            ],
+            UserRoles::STUDENT->value => [
+                'en' => [
+                    'title' => 'Student',
+                ],
+                'ua' => [
+                    'title' => 'Студент',
+                ],
+            ],
+            UserRoles::TEACHER->value => [
+                'en' => [
+                    'title' => 'Teacher',
+                ],
+                'ua' => [
+                    'title' => 'Викладач',
+                ],
+            ],
         ];
 
         foreach ($data as $item => $value) {

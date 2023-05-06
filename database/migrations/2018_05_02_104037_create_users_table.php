@@ -15,20 +15,20 @@ class  CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
+            $table->foreignId('role_id')->nullable()->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+
+            $table->foreignId('teacher_id')
+                ->nullable()
+                ->references('id')->on('users')
+                ->cascadeOnUpdate()->cascadeOnDelete();
+
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
             $table->string('email')->unique();
             $table->string('password');
             $table->string('remember_token')->nullable();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->timestamps();
-            $table->softDeletes();
-        });
 
-        Schema::create('role_user', function (Blueprint $table) {
-            $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('role_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

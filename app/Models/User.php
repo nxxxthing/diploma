@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -24,26 +25,50 @@ class User extends Authenticatable implements JWTSubject
     protected $dates = [
         'updated_at',
         'created_at',
-        'deleted_at',
     ];
 
     protected $fillable = [
-        'name',
+        'group_id',
+        'teacher_id',
+        'role_id',
+        'first_name',
+        'last_name',
         'email',
         'password',
         'created_at',
         'updated_at',
-        'deleted_at',
     ];
 
-    public function adminlte_profile_url()
+    public function getFullNameAttribute(): string
     {
-        return route('admin.users.edit', ['user' => $this]);
+        return "$this->first_name $this->last_name";
     }
 
-    public function roles(): BelongsToMany
+    public function scopeWhereRole(Builder $query, ...$roles): Builder
     {
-        return $this->belongsToMany(Role::class);
+        return $query->whereHas('role', function ($q) use ($roles) {
+            $q->whereIn('slug', $roles);
+        });
+    }
+
+    public function adminlte_profile_url(): string
+    {
+        return route('admin.users.edit', ['user' => $this, 'type' => $this->role?->slug]);
+    }
+
+    public function role(): BelongsTo
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function teacher(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'teacher_id');
+    }
+
+    public function group(): BelongsTo
+    {
+        return $this->belongsTo(Group::class);
     }
 
     public function getJWTIdentifier()
@@ -51,12 +76,12 @@ class User extends Authenticatable implements JWTSubject
         return $this->getKey();
     }
 
-    public function getJWTCustomClaims()
+    public function getJWTCustomClaims(): array
     {
         return [];
     }
 
-    public function sendPasswordResetNotification($token)
+    public function sendPasswordResetNotification($token): void
     {
         $this->notify(new PasswordReset($token, $this));
     }

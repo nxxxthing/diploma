@@ -16,18 +16,22 @@ class UserSeeder extends BaseSeeder
     public function run()
     {
         try {
-            $admin_exists = User::where('email', 'admin@admin.com')->exists();
+            $admin_exists = User::where('email', 'admin@admin.com')
+                ->orWhereHas(
+                    'role',
+                    function ($q) {
+                        $q->where('slug', UserRoles::ADMIN->value);
+                    }
+                )
+                ->exists();
 
             if (!$admin_exists) {
-                (new UserService())
-                    ->register(new UserData(
-                        email:'admin@admin.com',
-                        name: 'Admin',
-                        password: 'admin'
-                    ))
-                    ->attachRole(
-                        Role::whereSlug(UserRoles::ADMIN->value)->first()
-                    );
+                User::create([
+                    'email' => 'admin@admin.com',
+                    'first_name' => 'Admin',
+                    'password' => bcrypt('admin'),
+                    'role_id' => Role::whereSlug(UserRoles::ADMIN->value)->first()?->id,
+                ]);
             }
         } catch (Exception $e) {
             $this->command->error($e->getMessage());

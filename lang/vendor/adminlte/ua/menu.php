@@ -23,5 +23,11 @@ return [
     'site_management'               => 'Управління сайтом',
     'site_content'                  => 'Вміст сайту',
     'system'                        => 'Системні налаштування',
-    'modules'                       => 'Модулі'
+    'modules'                       => 'Модулі',
+    'student'                       => 'Студенти',
+    'teacher'                       => 'Викладачі',
+    'university'                    => 'Університет',
+    'faculties'                     => 'Факультети',
+    'cathedras'                     => 'Кафедри',
+    'groups'                        => 'Групи',
 ];

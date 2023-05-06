@@ -256,32 +256,74 @@ return [
         ],
 //        ['header' => ['admins']],
         [
-            'text' => ['admins'],
+            'text' => ['users'],
             'icon' => '	fas fa-fw fa-user-alt',
             'submenu' => [
                 [
-                    'text' => [UserRoles::ADMIN()],
-                    'url'  => 'admin/users' ,
-                    'can'  => UserRoles::ADMIN() . '_access',
+                    'text' => [UserRoles::ADMIN->value],
+                    'url'  => 'admin/users/' . UserRoles::ADMIN->value ,
+                    'can'  => UserRoles::ADMIN->value . '_access',
                     'icon' => '',
-                    'active' => ['admin/users'],
+                    'active' => ['admin/users/' . UserRoles::ADMIN->value . '/*' ],
+                ],
+                [
+                    'text' => [UserRoles::STUDENT->value],
+                    'url'  => 'admin/users/' . UserRoles::STUDENT->value ,
+                    'can'  => UserRoles::STUDENT->value . '_access',
+                    'icon' => '',
+                    'active' => ['admin/users/' . UserRoles::STUDENT->value . '/*'],
+                ],
+                [
+                    'text' => [UserRoles::TEACHER->value],
+                    'url'  => 'admin/users/' . UserRoles::TEACHER->value ,
+                    'can'  => UserRoles::TEACHER->value . '_access',
+                    'icon' => '',
+                    'active' => ['admin/users/' . UserRoles::TEACHER->value . '/*'],
                 ],
             ]
         ],
+//        ['header' => ['admins']],
         [
-            'text' => ['site_content'],
-            'icon' => 'fas fa-fw  fa-bars',
+            'text' => ['university'],
+            'icon' => '	fas fa-fw fa-school',
             'submenu' => [
                 [
-                    'text'        => ['modules'],
-                    'key'         => 'modules',
-                    'url'         => 'admin/modules',
+                    'text' => ['faculties'],
+                    'url'  => 'admin/faculties' ,
+                    'can'  => 'faculties_access',
                     'icon' => '',
-                    'active'      => ['admin/modules/*'],
-                    'can'         => 'modules_access'
+                    'active' => ['admin/faculties/*' ],
                 ],
-            ],
+                [
+                    'text' => ['cathedras'],
+                    'url'  => 'admin/cathedras' ,
+                    'can'  => 'cathedras_access',
+                    'icon' => '',
+                    'active' => ['admin/cathedras/*' ],
+                ],
+                [
+                    'text' => ['groups'],
+                    'url'  => 'admin/groups' ,
+                    'can'  => 'groups_access',
+                    'icon' => '',
+                    'active' => ['admin/groups/*' ],
+                ],
+            ]
         ],
+//        [
+//            'text' => ['site_content'],
+//            'icon' => 'fas fa-fw  fa-bars',
+//            'submenu' => [
+//                [
+//                    'text'        => ['modules'],
+//                    'key'         => 'modules',
+//                    'url'         => 'admin/modules',
+//                    'icon' => '',
+//                    'active'      => ['admin/modules/*'],
+//                    'can'         => 'modules_access'
+//                ],
+//            ],
+//        ],
         [
             'text' => ['system'],
             'icon' => 'fas fa-fw fa-cogs',
@@ -331,26 +373,26 @@ return [
                         ],
                     ],
                 ],
-                [
-                    'text' => ['variables'],
-//            'icon' => 'fas fa-cogs',
-                    'icon' => '',
-                    'can' => 'variables_access',
-                    'submenu' => [
-                        [
-                            'text' => ['list_of_variables'],
-                            'icon' => '',
-                            'route' => 'admin.variables.list.index',
-                            'active' => ['regex:@^admin/variables/list.+@'],
-                        ],
-                        [
-                            'text' =>  ['configure_variables'],
-                            'icon' => '',
-                            'route' => 'admin.variables.index',
-                            'active' => ['regex:@^admin/variables/(?!list).+@'],
-                        ],
-                    ]
-                ],
+//                [
+//                    'text' => ['variables'],
+////            'icon' => 'fas fa-cogs',
+//                    'icon' => '',
+//                    'can' => 'variables_access',
+//                    'submenu' => [
+//                        [
+//                            'text' => ['list_of_variables'],
+//                            'icon' => '',
+//                            'route' => 'admin.variables.list.index',
+//                            'active' => ['regex:@^admin/variables/list.+@'],
+//                        ],
+//                        [
+//                            'text' =>  ['configure_variables'],
+//                            'icon' => '',
+//                            'route' => 'admin.variables.index',
+//                            'active' => ['regex:@^admin/variables/(?!list).+@'],
+//                        ],
+//                    ]
+//                ],
             ],
         ],
     ],

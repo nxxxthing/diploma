@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 use App\Http\Controllers\Backend\{AdminSettingController,
     AuthController,
+    CathedraController,
+    FacultyController,
+    GroupsController,
     HomeController,
     PermissionsController,
     RolesController,
@@ -11,8 +14,7 @@ use App\Http\Controllers\Backend\{AdminSettingController,
     UploaderController,
     UserController,
     VariableController,
-    ModuleController
-};
+    ModuleController};
 use Illuminate\Support\Facades\Route;
 
 Route::get('locale/{locale}', function ($locale) {
@@ -31,12 +33,18 @@ Route::group(
                 'middleware' => 'auth',
             ],
             function () {
+                Route::resource('faculties', FacultyController::class);
+                Route::resource('cathedras', CathedraController::class);
+                Route::resource('groups', GroupsController::class);
+
                 Route::get('users/new_password/{id}', [UserController::class, 'getNewPassword'])
                     ->name('users.new_password.get');
                 Route::post('users/new_password/{id}', [UserController::class, 'postNewPassword'])
                     ->name('users.new_password.post');
 
-                Route::resource('users', UserController::class, ['except' => 'delete']);
+                Route::resource('users/{type?}', UserController::class, ['except' => 'delete'])
+                    ->parameter('{type?}', 'user')
+                    ->names('users');
                 Route::post('user/{id}/ajax_field', [UserController::class, 'ajaxFieldChange'])
                     ->middleware('ajax')->name('user.ajax_field');
 

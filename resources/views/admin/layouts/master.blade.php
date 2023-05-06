@@ -14,7 +14,7 @@
     @toastr_js
     @toastr_render
     @livewireScripts
-    <script src="{{ mix('js/admin/alpine.js') }}"></script>
+    <script defer src="{{ mix('js/admin/alpine.js') }}"></script>
 @endpush
 
 @push('body')
