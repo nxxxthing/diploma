@@ -30,4 +30,5 @@ return [
     'faculties'                     => 'Факультети',
     'cathedras'                     => 'Кафедри',
     'groups'                        => 'Групи',
+    'lessons'                       => 'Предмети',
 ];

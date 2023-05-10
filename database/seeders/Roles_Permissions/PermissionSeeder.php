@@ -136,5 +136,13 @@ class PermissionSeeder extends BaseSeeder
             ->for($admin)
             ->syncModule()
             ->clear();
+
+        Permissions::createModule('lessons', [
+            'en' => 'Lessons',
+            'ua' => 'Предмети',
+        ])
+            ->for($admin)
+            ->syncModule()
+            ->clear();
     }
 }

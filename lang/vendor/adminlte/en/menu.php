@@ -32,4 +32,5 @@ return [
     'faculties'                     => 'Faculties',
     'cathedras'                     => 'Cathedras',
     'groups'                        => 'Groups',
+    'lessons'                       => 'Lessons',
 ];

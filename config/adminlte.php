@@ -308,6 +308,13 @@ return [
                     'icon' => '',
                     'active' => ['admin/groups/*' ],
                 ],
+                [
+                    'text' => ['lessons'],
+                    'url'  => 'admin/lessons' ,
+                    'can'  => 'lessons_access',
+                    'icon' => '',
+                    'active' => ['admin/lessons/*' ],
+                ],
             ]
         ],
 //        [

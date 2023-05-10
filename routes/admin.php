@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\{AdminSettingController,
     FacultyController,
     GroupsController,
     HomeController,
+    LessonController,
     PermissionsController,
     RolesController,
     TranslationController,
@@ -36,6 +37,7 @@ Route::group(
                 Route::resource('faculties', FacultyController::class);
                 Route::resource('cathedras', CathedraController::class);
                 Route::resource('groups', GroupsController::class);
+                Route::resource('lessons', LessonController::class);
 
                 Route::get('users/new_password/{id}', [UserController::class, 'getNewPassword'])
                     ->name('users.new_password.get');
