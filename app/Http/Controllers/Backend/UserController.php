@@ -15,7 +15,7 @@ class UserController extends Controller
     public function index($type = "")
     {
 
-        abort_unless(\Gate::allows($this->module . '_access'), 403);
+        abort_unless(\Gate::allows($type . '_access'), 403);
 
         $data['module'] = $this->module;
         $data['type'] = $type;
@@ -23,9 +23,16 @@ class UserController extends Controller
         return view('admin.view.' . $this->module . '.index', $data);
     }
 
+    public function me()
+    {
+        $data['model'] = auth('web')->user();
+
+        return view('admin.view.users.self-edit', $data);
+    }
+
     public function create($type = "")
     {
-        abort_unless(\Gate::allows($this->module . '_create'), 403);
+        abort_unless(\Gate::allows($type . '_create'), 403);
 
         $data['model'] = new User();
 
@@ -38,7 +45,7 @@ class UserController extends Controller
 
     public function edit($type, User $user)
     {
-        abort_unless(\Gate::allows($this->module . '_edit'), 403);
+        abort_unless(\Gate::allows($type . '_edit'), 403);
 
         $user->load('role');
 

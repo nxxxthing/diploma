@@ -26,7 +26,41 @@ class UserList extends Component implements Tables\Contracts\HasTable
 
     protected function getTableQuery(): Builder
     {
-        return User::query()->with('role')->whereRole($this->type);
+        $user = auth('web')->user();
+        return match ($user->role?->slug)
+        {
+            UserRoles::ADMIN->value => User::query()->with('role')->whereRole($this->type),
+
+            UserRoles::STUDENT->value => $this->getQueryForStudent($user),
+
+            UserRoles::TEACHER->value => $this->getQueryForTeacher($user),
+        };
+    }
+
+    public function getQueryForStudent($student)
+    {
+        $users = User::query()->with('role')->whereRole($this->type);
+
+        return match($this->type) {
+            UserRoles::STUDENT->value => $users->where('id', $student->id),
+
+            UserRoles::TEACHER->value => $users->whereHas('students', fn($q) => $q->where('id', $student->id)),
+
+            default => $users,
+        };
+    }
+
+    public function getQueryForTeacher($teacher)
+    {
+        $users = User::query()->with('role')->whereRole($this->type);
+
+        return match($this->type) {
+            UserRoles::TEACHER->value => $users->where('id', $teacher->id),
+
+            UserRoles::STUDENT->value => $users->where('teacher_id', $teacher->id),
+
+            default => $users,
+        };
     }
 
     protected function getTableColumns(): array
@@ -57,22 +91,30 @@ class UserList extends Component implements Tables\Contracts\HasTable
 
     protected function getTableActions(): array
     {
-        return [
-            Action::make('edit')
-                ->url(fn (User $record): string => route('admin.users.edit', ['type' => $this->type, 'user' => $record]))
-                ->button()
-                ->label(__('admin_labels.edit')),
+        $data =[];
+        if (\Gate::allows($this->type . '_edit')) {
+            $data[] = Action::make('edit')
+                        ->url(fn (User $record): string => route('admin.users.edit', ['type' => $this->type, 'user' => $record]))
+                        ->button()
+                        ->label(__('admin_labels.edit'));
+        }
+        if (\Gate::allows($this->type . '_delete')) {
+            $data[] = DeleteAction::make()->button()
+                        ->label(__('admin_labels.delete'))
+                        ->modalHeading(function () {
+                            return __('admin_labels.delete_record');
+                        })->hidden(fn (Model $record) => $record->id == auth('web')->id());
+        }
 
-            DeleteAction::make()->button()
-                ->label(__('admin_labels.delete'))
-                ->modalHeading(function () {
-                    return __('admin_labels.delete_record');
-                })->hidden(fn (Model $record) => $record->id == auth('web')->id())
-        ];
+        return $data;
     }
 
     protected function getTableBulkActions(): array
     {
+        if (auth('web')->user()->role->slug != UserRoles::ADMIN->value) {
+            return [];
+        }
+
         return [
             BulkAction::make('delete')
                 ->action(fn (Collection $records) => $records->each->delete())
@@ -83,7 +125,6 @@ class UserList extends Component implements Tables\Contracts\HasTable
 
     public function isTableRecordSelectable(): ?\Closure
     {
-
         return fn (Model $record): bool => $record->id != auth('web')->id();
     }
 }

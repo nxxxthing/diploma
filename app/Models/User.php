@@ -8,6 +8,8 @@ use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -53,7 +55,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function adminlte_profile_url(): string
     {
-        return route('admin.users.edit', ['user' => $this, 'type' => $this->role?->slug]);
+        return route('admin.users.self-edit');
     }
 
     public function role(): BelongsTo
@@ -64,6 +66,16 @@ class User extends Authenticatable implements JWTSubject
     public function teacher(): BelongsTo
     {
         return $this->belongsTo(User::class, 'teacher_id');
+    }
+
+    public function students(): HasMany
+    {
+        return $this->hasMany(User::class, 'teacher_id');
+    }
+
+    public function schedules(): HasMany
+    {
+        return $this->hasMany(Schedule::class, 'teacher_id');
     }
 
     public function group(): BelongsTo

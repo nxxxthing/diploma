@@ -14,6 +14,8 @@ class PermissionSeeder extends BaseSeeder
     public function run()
     {
         $admin = Role::whereSlug(UserRoles::ADMIN->value)->first();
+        $student = Role::whereSlug(UserRoles::STUDENT->value)->first();
+        $teacher = Role::whereSlug(UserRoles::TEACHER->value)->first();
 
         Permissions::for($admin)->clearPermissions()->clear();
 
@@ -74,7 +76,6 @@ class PermissionSeeder extends BaseSeeder
                 'ua' => 'Адмін',
             ])
             ->for($admin)
-            ->except(['create', 'edit', 'delete', 'show'])
             ->syncModule()
             ->clear();
 
@@ -83,7 +84,9 @@ class PermissionSeeder extends BaseSeeder
                 'ua' => 'Студент',
             ])
             ->for($admin)
-            ->except(['create', 'edit', 'delete', 'show'])
+            ->syncModule()
+            ->except(['create', 'edit', 'delete'])
+            ->for($teacher)
             ->syncModule()
             ->clear();
 
@@ -92,7 +95,9 @@ class PermissionSeeder extends BaseSeeder
                 'ua' => 'Викладач',
             ])
             ->for($admin)
-            ->except(['create', 'edit', 'delete', 'show'])
+            ->syncModule()
+            ->for($student)
+            ->except(['create', 'edit', 'delete'])
             ->syncModule()
             ->clear();
 
@@ -142,6 +147,31 @@ class PermissionSeeder extends BaseSeeder
             'ua' => 'Предмети',
         ])
             ->for($admin)
+            ->syncModule()
+            ->for($student)
+            ->except(['create', 'edit', 'delete'])
+            ->syncModule()
+            ->clear();
+
+        Permissions::createModule('schedules', [
+            'en' => 'Schedule',
+            'ua' => 'Розклад',
+        ])
+            ->for($admin)
+            ->syncModule()
+            ->for($student, $teacher)
+            ->except(['create', 'edit', 'delete'])
+            ->syncModule()
+            ->clear();
+
+        Permissions::createModule('progress', [
+            'en' => 'Progress',
+            'ua' => 'Прогрес',
+        ])
+            ->for($student)
+            ->syncModule()
+            ->for($teacher)
+            ->except(['create'])
             ->syncModule()
             ->clear();
     }

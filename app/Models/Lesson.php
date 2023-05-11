@@ -14,4 +14,9 @@ class Lesson extends Model
     protected $translatedAttributes = [
         'title',
     ];
+
+    public function schedules()
+    {
+        return $this->hasMany(Schedule::class);
+    }
 }

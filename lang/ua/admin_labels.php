@@ -205,4 +205,37 @@ return [
     'first_name' => 'Ім\'я',
     'last_name' => 'Прізвище',
     'teacher' => 'Вчитель',
+    'short_title' => 'Скорочена назва',
+    'faculty_id' => 'Факультет',
+    'cathedra_id' => 'Кафедра',
+    'lesson' => 'Урок',
+    'time' => 'Час',
+    'week' => 'Тиждень',
+    'day' => 'День тижня',
+    'not_reviewed' => 'Не оцінено',
+
+    'week_types' => [
+        \App\Enums\WeekTypes::FIRST->value => 'Перший тиждень',
+        \App\Enums\WeekTypes::SECOND->value => 'Другий тиждень',
+    ],
+    'days' => [
+        \App\Enums\Days::MONDAY->value => 'Понеділок',
+        \App\Enums\Days::TUESDAY->value => 'Вівторок',
+        \App\Enums\Days::WEDNESDAY->value => 'Середа',
+        \App\Enums\Days::THURSDAY->value => 'Четвер',
+        \App\Enums\Days::FRIDAY->value => 'П\'ятниця',
+        \App\Enums\Days::SATURDAY->value => 'Субота',
+        \App\Enums\Days::SUNDAY->value => 'Неділя',
+    ],
+    'progress_types' => [
+        \App\Enums\ProgressTypes::FILE->value => 'Файл',
+        \App\Enums\ProgressTypes::IMAGE->value => 'Картинка',
+        \App\Enums\ProgressTypes::TEXT->value => 'Текст',
+    ],
+    'general_data' => 'Загальна інформація',
+    'data' => 'Дані',
+    'review' => 'Оцінка',
+    'result' => 'Оцінка',
+    'comment' => 'Коментар',
+    'add_review' => 'Оцінити'
 ];

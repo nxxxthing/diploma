@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Lessons;
 
+use App\Api\v1\Enums\UserRoles;
 use App\Http\Livewire\Traits\Table\Renderable;
 use App\Models\Lesson;
 use Filament\Tables;
@@ -21,7 +22,22 @@ class LessonsList extends Component implements Tables\Contracts\HasTable
 
     protected function getTableQuery(): Builder
     {
-        return Lesson::query();
+        $user = auth('web')->user();
+
+        return match ($user->role?->slug) {
+            UserRoles::ADMIN->value => Lesson::query(),
+
+            UserRoles::STUDENT->value => Lesson::whereHas(
+                'schedules',
+                fn ($schedules) => $schedules->whereHas(
+                    'group',
+                    fn($group) => $group->whereHas(
+                        'students',
+                        fn($student) => $student->where('id', $user->id)
+                    )
+                )
+            )
+        };
     }
 
     protected function getTableColumns(): array
@@ -41,22 +57,30 @@ class LessonsList extends Component implements Tables\Contracts\HasTable
 
     protected function getTableActions(): array
     {
-        return [
-            Action::make('edit')
-                ->url(fn (Lesson $record): string => route('admin.groups.edit', $record))
+        $data =[];
+        if (\Gate::allows('lessons_edit')) {
+            $data[] = Action::make('edit')
+                ->url(fn (Lesson $record): string => route('admin.lessons.edit', $record))
                 ->button()
-                ->label(__('admin_labels.edit')),
-
-            DeleteAction::make()->button()
+                ->label(__('admin_labels.edit'));
+        }
+        if (\Gate::allows('lessons_delete')) {
+            $data[] = DeleteAction::make()->button()
                 ->label(__('admin_labels.delete'))
                 ->modalHeading(function () {
                     return __('admin_labels.delete_record');
-                })
-        ];
+                });
+        }
+
+        return $data;
+
     }
 
     protected function getTableBulkActions(): array
     {
+        if (auth('web')->user()->role->slug != UserRoles::ADMIN->value) {
+            return [];
+        }
         return [
             BulkAction::make('delete')
                 ->action(fn (Collection $records) => $records->each->delete())

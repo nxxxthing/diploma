@@ -86,7 +86,7 @@ return [
     'usermenu_header_class' => 'bg-gray-dark',
     'usermenu_image' => false,
     'usermenu_desc' => false,
-    'usermenu_profile_url' => '123',
+    'usermenu_profile_url' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -207,9 +207,9 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => '/admin',
-    'logout_url' => 'admin/logout',
-    'login_url' => 'admin/login',
+    'dashboard_url' => '/',
+    'logout_url' => 'logout',
+    'login_url' => 'login',
     'register_url' => '',
     'password_reset_url' => '',
     'password_email_url' => '',
@@ -261,24 +261,24 @@ return [
             'submenu' => [
                 [
                     'text' => [UserRoles::ADMIN->value],
-                    'url'  => 'admin/users/' . UserRoles::ADMIN->value ,
+                    'url'  => 'users/' . UserRoles::ADMIN->value ,
                     'can'  => UserRoles::ADMIN->value . '_access',
                     'icon' => '',
-                    'active' => ['admin/users/' . UserRoles::ADMIN->value . '/*' ],
+                    'active' => ['users/' . UserRoles::ADMIN->value . '/*' ],
                 ],
                 [
                     'text' => [UserRoles::STUDENT->value],
-                    'url'  => 'admin/users/' . UserRoles::STUDENT->value ,
+                    'url'  => 'users/' . UserRoles::STUDENT->value ,
                     'can'  => UserRoles::STUDENT->value . '_access',
                     'icon' => '',
-                    'active' => ['admin/users/' . UserRoles::STUDENT->value . '/*'],
+                    'active' => ['users/' . UserRoles::STUDENT->value . '/*'],
                 ],
                 [
                     'text' => [UserRoles::TEACHER->value],
-                    'url'  => 'admin/users/' . UserRoles::TEACHER->value ,
+                    'url'  => 'users/' . UserRoles::TEACHER->value ,
                     'can'  => UserRoles::TEACHER->value . '_access',
                     'icon' => '',
-                    'active' => ['admin/users/' . UserRoles::TEACHER->value . '/*'],
+                    'active' => ['users/' . UserRoles::TEACHER->value . '/*'],
                 ],
             ]
         ],
@@ -289,32 +289,34 @@ return [
             'submenu' => [
                 [
                     'text' => ['faculties'],
-                    'url'  => 'admin/faculties' ,
+                    'url'  => 'faculties' ,
                     'can'  => 'faculties_access',
                     'icon' => '',
-                    'active' => ['admin/faculties/*' ],
+                    'active' => ['faculties/*' ],
                 ],
                 [
                     'text' => ['cathedras'],
-                    'url'  => 'admin/cathedras' ,
+                    'url'  => 'cathedras' ,
                     'can'  => 'cathedras_access',
                     'icon' => '',
-                    'active' => ['admin/cathedras/*' ],
+                    'active' => ['cathedras/*' ],
                 ],
                 [
                     'text' => ['groups'],
-                    'url'  => 'admin/groups' ,
+                    'url'  => 'groups' ,
                     'can'  => 'groups_access',
                     'icon' => '',
-                    'active' => ['admin/groups/*' ],
+                    'active' => ['groups/*' ],
                 ],
                 [
                     'text' => ['lessons'],
-                    'url'  => 'admin/lessons' ,
+                    'url'  => 'lessons' ,
                     'can'  => 'lessons_access',
                     'icon' => '',
-                    'active' => ['admin/lessons/*' ],
+                    'active' => ['lessons/*' ],
                 ],
+                ['key' => 'student_schedule'],
+                ['key' => 'progress'],
             ]
         ],
 //        [
@@ -324,9 +326,9 @@ return [
 //                [
 //                    'text'        => ['modules'],
 //                    'key'         => 'modules',
-//                    'url'         => 'admin/modules',
+//                    'url'         => 'modules',
 //                    'icon' => '',
-//                    'active'      => ['admin/modules/*'],
+//                    'active'      => ['modules/*'],
 //                    'can'         => 'modules_access'
 //                ],
 //            ],
@@ -334,32 +336,33 @@ return [
         [
             'text' => ['system'],
             'icon' => 'fas fa-fw fa-cogs',
+            'can'         => 'admin_settings_access',
             'submenu' => [
 
                 [
                     'slug'        => 'admin_settings',
                     'text'        => ['admin_settings'],
-                    'url'         => 'admin/admin_settings',
+                    'url'         => 'admin_settings',
 //                    'icon'        => 'fas fa-fw  fa-cogs',
                     'icon' => '',
-                    'active'      => ['admin/admin_settings/*'],
+                    'active'      => ['admin_settings/*'],
                     'can'         => 'admin_settings_access'
                 ],
                 [
                     'slug' => 'permissions',
                     'text'        => ['access_rights'],
-                    'url'         => 'admin/permissions',
+                    'url'         => 'permissions',
 //            'icon'        => 'fas fa-fw fa-unlock-alt',
                     'icon' => '',
-                    'active'      => ['admin/permissions/*'],
+                    'active'      => ['permissions/*'],
                     'can'         => 'permissions_access'
                 ],
                 [
                     'text'        => ['roles'],
-                    'url'         => 'admin/roles',
+                    'url'         => 'roles',
 //            'icon'        => 'fas fa-fw fa-briefcase',
                     'icon' => '',
-                    'active'      => ['admin/roles/*'],
+                    'active'      => ['roles/*'],
                     'can'         => 'roles_access'
                 ],
                 [
@@ -371,12 +374,12 @@ return [
                         [
                             'text' => ['website_translations'],
                             'icon' => '',
-                            'url'  => 'admin/translation/site_labels',
+                            'url'  => 'translation/site_labels',
                         ],
                         [
                             'text' => ['admin_translations'],
                             'icon' => '',
-                            'url'  => 'admin/translation/admin_labels',
+                            'url'  => 'translation/admin_labels',
                         ],
                     ],
                 ],
@@ -390,13 +393,13 @@ return [
 //                            'text' => ['list_of_variables'],
 //                            'icon' => '',
 //                            'route' => 'admin.variables.list.index',
-//                            'active' => ['regex:@^admin/variables/list.+@'],
+//                            'active' => ['regex:@^variables/list.+@'],
 //                        ],
 //                        [
 //                            'text' =>  ['configure_variables'],
 //                            'icon' => '',
 //                            'route' => 'admin.variables.index',
-//                            'active' => ['regex:@^admin/variables/(?!list).+@'],
+//                            'active' => ['regex:@^variables/(?!list).+@'],
 //                        ],
 //                    ]
 //                ],

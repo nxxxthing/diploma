@@ -7,6 +7,7 @@ namespace App\Http\Livewire\Users;
 use App\Api\v1\Enums\UserRoles;
 use App\Models\Role;
 use App\Models\User;
+use Closure;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Section;
@@ -16,7 +17,6 @@ use Filament\Forms\Components\View;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 
@@ -36,7 +36,9 @@ class Users extends Component implements HasForms
 
     public function mount(): void
     {
-        $this->form->fill($this->getFormModel()->attributesToArray());
+        $data = $this->getFormModel()->attributesToArray();
+        unset($data['id']);
+        $this->form->fill($data);
     }
 
     public static function getFormSchema($isHidden = false): array
@@ -82,7 +84,7 @@ class Users extends Component implements HasForms
                             ->searchable(['first_name', 'last_name'])
                             ->preload()
                             ->label(__('admin_labels.teacher'))
-                            ->hidden($type != UserRoles::STUDENT->value),
+                            ->hidden(fn (Closure $get) => $get('role_id') != Role::where('slug', UserRoles::STUDENT->value)->first()?->id),
 
                         Select::make('group_id')
                             ->id('group_id')
@@ -99,22 +101,22 @@ class Users extends Component implements HasForms
                             )
                             ->searchable(['title'])
                             ->preload()
-                            ->reactive()
                             ->label(__('admin_labels.group'))
-                            ->hidden($type != UserRoles::STUDENT->value),
+                            ->hidden(fn (Closure $get) => $get('role_id') != Role::where('slug', UserRoles::STUDENT->value)->first()?->id),
 
                         Section::make(__('admin_labels.roles'))
                             ->schema([
                                 Select::make('role_id')
                                     ->options(Role::joinTranslations()->select('roles.id as id', 'role_translations.title as title')->pluck('title', 'id')->toArray())
                                     ->preload()
-                                     ->required()
+                                    ->required()
+                                    ->reactive()
                                     ->label(__('admin_labels.roles'))
-                                    ->afterStateHydrated(function (Select $component, $state) {
+                                    ->afterStateHydrated(function (Select $component, $state) use ($type) {
                                         if (empty($state)) {
                                             $state = Role::where('slug', $type)->first()?->id;
                                         }
-                                        $component->state($state);
+                                        $component->state($state)->reactive();
                                     }),
                             ])
                             ->collapsible(),
@@ -136,7 +138,7 @@ class Users extends Component implements HasForms
                     ])
                     ->columnSpan(['lg' => 1]),
 
-                View::make('admin.filament.buttons.submit')
+                View::make('admin.filament.buttons.submit'),
             ]),
         ];
     }
@@ -156,10 +158,10 @@ class Users extends Component implements HasForms
             $this->form->saveRelationships();
         }
 
-//        $this->dispatchBrowserEvent('toastr-notify', [
-//            'type' => 'success',
-//            'title' => __('admin_labels.successfully_saved'),
-//        ]);
+        $this->dispatchBrowserEvent('toastr-notify', [
+            'type' => 'success',
+            'title' => __('admin_labels.successfully_saved'),
+        ]);
 
 
         $type = collect($this->form->getState()['role_id']);
@@ -172,9 +174,6 @@ class Users extends Component implements HasForms
 
             return redirect($route);
         }
-
-        toastr()->success(__('admin_labels.successfully_saved'));
-        return redirect()->route('admin.users.edit', ['user' => $model, 'type' => $type]);
     }
 
     public function render(): string

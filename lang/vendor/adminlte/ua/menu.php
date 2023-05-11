@@ -31,4 +31,6 @@ return [
     'cathedras'                     => 'Кафедри',
     'groups'                        => 'Групи',
     'lessons'                       => 'Предмети',
+    'schedule'                      => 'Розклад',
+    'progress'                      => 'Прогрес наукової',
 ];

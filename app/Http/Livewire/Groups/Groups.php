@@ -70,9 +70,6 @@ class Groups extends Component implements HasForms
 
                 View::make('admin.filament.buttons.submit')
             ]),
-            Grid::make(1)->schema([
-
-            ])
         ];
     }
 

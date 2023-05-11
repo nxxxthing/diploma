@@ -9,7 +9,7 @@ trait Renderable
     public function render(): string
     {
         return <<<blade
-            <div id="test">
+            <div>
                 <form wire:submit.prevent="submit">
                     {{ \$this->form }}
                 </form>

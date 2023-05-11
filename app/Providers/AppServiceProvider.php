@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Api\v1\Enums\UserRoles;
 use App\Classes\FileUploader;
 use App\Classes\Permissions;
 use App\Http\Middleware\LocaleMiddleware;
 use App\Models\AdminSetting;
+use App\Models\Progress;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
@@ -81,16 +83,44 @@ class AppServiceProvider extends ServiceProvider
         }
 
         $events->listen(BuildingMenu::class, function (BuildingMenu $event) {
-//            $event->menu->addAfter('approve', [
-//                    'text'   => ['users_approve'],
-//                    'key'    => 'users_approve',
-//                    'url'    => 'admin/users_approve',
-//                    'icon'   => 'fas fa-fw fa-minus',
-//                    'icon' => '',
-//                    'active' => ['admin/users_approve/*'],
-//                    'label'  => User::where('status', UserStatuses::NEW)->count(),
-//                    'can'    => 'users_approve_access'
-//            ]);
+            $user = auth('web')->user();
+            $user->load('role');
+
+            if ($user->role?->slug == UserRoles::STUDENT->value)
+            {
+                $event->menu->addAfter('progress', [
+                    'text'   => ['progress'],
+                    'key'    => 'student_progress',
+                    'url'    => 'student-progress',
+                    'icon'   => '',
+                    'active' => ['student-progress/*'],
+                ]);
+                $event->menu->addAfter('student_schedule', [
+                    'text'   => ['schedule'],
+                    'key'    => 'student_schedule',
+                    'url'    => 'student-schedule',
+                    'icon'   => '',
+                    'active' => ['student-schedule/*'],
+                ]);
+            } elseif ($user->role?->slug == UserRoles::TEACHER->value) {
+                $event->menu->addAfter('progress', [
+                    'text'   => ['progress'],
+                    'key'    => 'teacher_progress',
+                    'url'    => 'teacher-progress',
+                    'icon'   => '',
+                    'active' => ['teacher-progress/*'],
+                    'label' => Progress::whereHas('student', fn($q) => $q->where('teacher_id', $user->id))
+                        ->whereNull('result')->count(),
+                ]);
+
+                $event->menu->addAfter('student_schedule', [
+                    'text'   => ['schedule'],
+                    'key'    => 'teacher_schedule',
+                    'url'    => 'teacher-schedule',
+                    'icon'   => '',
+                    'active' => ['teacher-schedule/*'],
+                ]);
+            }
 
             $event->menu->add([
                 'key' => 'lang',

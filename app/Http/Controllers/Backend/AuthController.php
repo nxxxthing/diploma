@@ -29,11 +29,7 @@ class AuthController extends Controller
     {
         $email = $request->email;
 
-        $allowedRoles = UserRoles::getAdmins();
-
         $user = User::where('email', $email)
-            ->whereHas('role', fn ($q) =>
-                $q->whereIn('slug', $allowedRoles))
             ->with('role')->first();
 
         if (!$user) {
@@ -51,7 +47,7 @@ class AuthController extends Controller
         );
 
         if ($is_valid) {
-            return redirect('/admin');
+            return redirect('/');
         }
 
         $errors = new MessageBag(['email' => ['These credentials do not match our records.']]);
@@ -62,6 +58,6 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect('/admin/login');
+        return redirect('/login');
     }
 }

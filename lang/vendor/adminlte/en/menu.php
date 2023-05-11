@@ -33,4 +33,6 @@ return [
     'cathedras'                     => 'Cathedras',
     'groups'                        => 'Groups',
     'lessons'                       => 'Lessons',
+    'schedule'                      => 'Schedule',
+    'progress'                      => 'Work progress',
 ];
