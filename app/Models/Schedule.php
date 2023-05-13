@@ -17,6 +17,10 @@ class Schedule extends Model
         'time',
     ];
 
+    protected $casts = [
+        'time' => 'datetime'
+    ];
+
     public function lesson(): BelongsTo
     {
         return $this->belongsTo(Lesson::class);

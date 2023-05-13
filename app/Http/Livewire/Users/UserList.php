@@ -67,6 +67,7 @@ class UserList extends Component implements Tables\Contracts\HasTable
     {
         return [
             TextColumn::make('id')
+                ->hidden(auth('web')->user()->role?->slug != UserRoles::ADMIN->value)
                 ->sortable()
                 ->label(__('admin_labels.id')),
 

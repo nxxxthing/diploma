@@ -22,7 +22,7 @@
             @endif
             <tr>
 {{--                <td> {{__("admin_labels.days.{$data->day}")}} </td>--}}
-                <td> {{$data->time}} </td>
+                <td> {{$data->time->format('H:i')}} </td>
                 <td> {{$data->lesson?->title}} </td>
                 <td> {{$data->teacher?->full_name}} </td>
             </tr>

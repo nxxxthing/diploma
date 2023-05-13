@@ -45,7 +45,8 @@ class LessonsList extends Component implements Tables\Contracts\HasTable
         $locale = app()->getLocale();
 
         return [
-            Tables\Columns\TextColumn::make('id'),
+            Tables\Columns\TextColumn::make('id')
+                ->hidden(auth('web')->user()->role?->slug != UserRoles::ADMIN->value),
 
             TextColumn::make('title:' . $locale)
                 ->searchable(query: function (Builder $query, string $search): Builder {

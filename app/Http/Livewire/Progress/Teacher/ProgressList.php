@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Progress\Teacher;
 
+use App\Api\v1\Enums\UserRoles;
 use App\Http\Livewire\Traits\Table\Renderable;
 use App\Models\Progress;
 use Filament\Tables;
@@ -27,7 +28,8 @@ class ProgressList extends Component implements Tables\Contracts\HasTable
     protected function getTableColumns(): array
     {
         return [
-            Tables\Columns\TextColumn::make('id'),
+            Tables\Columns\TextColumn::make('id')
+                ->hidden(auth('web')->user()->role?->slug != UserRoles::ADMIN->value),
 
             TextColumn::make('title')
                 ->searchable()

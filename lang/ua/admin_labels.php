@@ -237,5 +237,5 @@ return [
     'review' => 'Оцінка',
     'result' => 'Оцінка',
     'comment' => 'Коментар',
-    'add_review' => 'Оцінити'
+    'add_review' => 'Оцінити',
 ];
