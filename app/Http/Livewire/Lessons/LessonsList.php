@@ -10,6 +10,7 @@ use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\BulkAction;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ViewColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
@@ -36,6 +37,11 @@ class LessonsList extends Component implements Tables\Contracts\HasTable
                         fn($student) => $student->where('id', $user->id)
                     )
                 )
+            ),
+
+            UserRoles::TEACHER->value => Lesson::whereHas(
+                'schedules',
+                fn($schedules) => $schedules->where('teacher_id', $user->id)
             )
         };
     }
@@ -44,8 +50,8 @@ class LessonsList extends Component implements Tables\Contracts\HasTable
     {
         $locale = app()->getLocale();
 
-        return [
-            Tables\Columns\TextColumn::make('id')
+        $data = [
+            TextColumn::make('id')
                 ->hidden(auth('web')->user()->role?->slug != UserRoles::ADMIN->value),
 
             TextColumn::make('title:' . $locale)
@@ -54,6 +60,15 @@ class LessonsList extends Component implements Tables\Contracts\HasTable
                 })
                 ->label(__('admin_labels.title')),
         ];
+
+        if (auth('web')->user()?->role?->slug == UserRoles::STUDENT->value) {
+            $data[] = ViewColumn::make('studentSchedule.teacher')
+                    ->view('admin.filament.teachers')
+                    ->searchable()
+                    ->label(__('admin_labels.teacher'));
+        }
+
+        return $data;
     }
 
     protected function getTableActions(): array
