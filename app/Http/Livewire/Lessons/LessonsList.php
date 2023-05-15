@@ -64,7 +64,11 @@ class LessonsList extends Component implements Tables\Contracts\HasTable
         if (auth('web')->user()?->role?->slug == UserRoles::STUDENT->value) {
             $data[] = ViewColumn::make('studentSchedule.teacher')
                     ->view('admin.filament.teachers')
-                    ->searchable()
+                    ->searchable(query: fn (Builder $query, $search) => $query->wherehas(
+                        'studentSchedule',
+                        fn ($s) => $s->whereHas('teacher', fn($t) => $t->where('first_name', 'like', "%$search%")->orWhere('last_name', 'like', "%$search%")
+                        )
+                    ))
                     ->label(__('admin_labels.teacher'));
         }
 
