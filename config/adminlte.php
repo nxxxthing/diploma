@@ -245,11 +245,11 @@ return [
 
     'menu' => [
         // Navbar items:
-        [
-            'type'         => 'navbar-search',
-            'text'         => 'search',
-            'topnav_right' => true,
-        ],
+//        [
+//            'type'         => 'navbar-search',
+//            'text'         => 'search',
+//            'topnav_right' => true,
+//        ],
         [
             'type'         => 'fullscreen-widget',
             'topnav_right' => true,
@@ -263,21 +263,18 @@ return [
                     'text' => [UserRoles::ADMIN->value],
                     'url'  => 'users/' . UserRoles::ADMIN->value ,
                     'can'  => UserRoles::ADMIN->value . '_access',
-                    'icon' => '',
                     'active' => ['users/' . UserRoles::ADMIN->value . '/*' ],
                 ],
                 [
                     'text' => [UserRoles::STUDENT->value],
                     'url'  => 'users/' . UserRoles::STUDENT->value ,
                     'can'  => UserRoles::STUDENT->value . '_access',
-                    'icon' => '',
                     'active' => ['users/' . UserRoles::STUDENT->value . '/*'],
                 ],
                 [
                     'text' => [UserRoles::TEACHER->value],
                     'url'  => 'users/' . UserRoles::TEACHER->value ,
                     'can'  => UserRoles::TEACHER->value . '_access',
-                    'icon' => '',
                     'active' => ['users/' . UserRoles::TEACHER->value . '/*'],
                 ],
             ]
@@ -291,28 +288,24 @@ return [
                     'text' => ['faculties'],
                     'url'  => 'faculties' ,
                     'can'  => 'faculties_access',
-                    'icon' => '',
                     'active' => ['faculties/*' ],
                 ],
                 [
                     'text' => ['cathedras'],
                     'url'  => 'cathedras' ,
                     'can'  => 'cathedras_access',
-                    'icon' => '',
                     'active' => ['cathedras/*' ],
                 ],
                 [
                     'text' => ['groups'],
                     'url'  => 'groups' ,
                     'can'  => 'groups_access',
-                    'icon' => '',
                     'active' => ['groups/*' ],
                 ],
                 [
                     'text' => ['lessons'],
                     'url'  => 'lessons' ,
                     'can'  => 'lessons_access',
-                    'icon' => '',
                     'active' => ['lessons/*' ],
                 ],
                 ['key' => 'student_schedule'],
@@ -327,7 +320,6 @@ return [
 //                    'text'        => ['modules'],
 //                    'key'         => 'modules',
 //                    'url'         => 'modules',
-//                    'icon' => '',
 //                    'active'      => ['modules/*'],
 //                    'can'         => 'modules_access'
 //                ],
@@ -344,7 +336,6 @@ return [
                     'text'        => ['admin_settings'],
                     'url'         => 'admin_settings',
 //                    'icon'        => 'fas fa-fw  fa-cogs',
-                    'icon' => '',
                     'active'      => ['admin_settings/*'],
                     'can'         => 'admin_settings_access'
                 ],
@@ -353,7 +344,6 @@ return [
                     'text'        => ['access_rights'],
                     'url'         => 'permissions',
 //            'icon'        => 'fas fa-fw fa-unlock-alt',
-                    'icon' => '',
                     'active'      => ['permissions/*'],
                     'can'         => 'permissions_access'
                 ],
@@ -361,24 +351,20 @@ return [
                     'text'        => ['roles'],
                     'url'         => 'roles',
 //            'icon'        => 'fas fa-fw fa-briefcase',
-                    'icon' => '',
                     'active'      => ['roles/*'],
                     'can'         => 'roles_access'
                 ],
                 [
                     'text'    => ['translations'],
 //            'icon'    => 'fas fa-fw fa-share',
-                    'icon' => '',
                     'can'     => 'translations_access',
                     'submenu' => [
+//                        [
+//                            'text' => ['website_translations'],
+//                            'url'  => 'translation/site_labels',
+//                        ],
                         [
                             'text' => ['website_translations'],
-                            'icon' => '',
-                            'url'  => 'translation/site_labels',
-                        ],
-                        [
-                            'text' => ['admin_translations'],
-                            'icon' => '',
                             'url'  => 'translation/admin_labels',
                         ],
                     ],
@@ -386,18 +372,15 @@ return [
 //                [
 //                    'text' => ['variables'],
 ////            'icon' => 'fas fa-cogs',
-//                    'icon' => '',
 //                    'can' => 'variables_access',
 //                    'submenu' => [
 //                        [
 //                            'text' => ['list_of_variables'],
-//                            'icon' => '',
 //                            'route' => 'admin.variables.list.index',
 //                            'active' => ['regex:@^variables/list.+@'],
 //                        ],
 //                        [
 //                            'text' =>  ['configure_variables'],
-//                            'icon' => '',
 //                            'route' => 'admin.variables.index',
 //                            'active' => ['regex:@^variables/(?!list).+@'],
 //                        ],

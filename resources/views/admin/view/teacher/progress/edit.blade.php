@@ -41,7 +41,7 @@
         @elseif($model->type == \App\Enums\ProgressTypes::FILE->value)
             <tr>
                 <th style="width: 15%">
-                    {{__('admin_labels.description')}}
+                    {{__('admin_labels.file')}}
                 </th>
                 <td>
                     <a class="btn btn-primary" href="{{route('admin.progress.download', $model)}}" target="_blank">{{__('admin_labels.download')}}</a>

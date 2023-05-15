@@ -92,14 +92,12 @@ class AppServiceProvider extends ServiceProvider
                     'text'   => ['progress'],
                     'key'    => 'student_progress',
                     'url'    => 'student-progress',
-                    'icon'   => '',
                     'active' => ['student-progress/*'],
                 ]);
                 $event->menu->addAfter('student_schedule', [
                     'text'   => ['schedule'],
                     'key'    => 'student_schedule',
                     'url'    => 'student-schedule',
-                    'icon'   => '',
                     'active' => ['student-schedule/*'],
                 ]);
             } elseif ($user->role?->slug == UserRoles::TEACHER->value) {
@@ -107,7 +105,6 @@ class AppServiceProvider extends ServiceProvider
                     'text'   => ['progress'],
                     'key'    => 'teacher_progress',
                     'url'    => 'teacher-progress',
-                    'icon'   => '',
                     'active' => ['teacher-progress/*'],
                     'label' => Progress::whereHas('student', fn($q) => $q->where('teacher_id', $user->id))
                         ->whereNull('result')->count(),
@@ -117,7 +114,6 @@ class AppServiceProvider extends ServiceProvider
                     'text'   => ['schedule'],
                     'key'    => 'teacher_schedule',
                     'url'    => 'teacher-schedule',
-                    'icon'   => '',
                     'active' => ['teacher-schedule/*'],
                 ]);
             }

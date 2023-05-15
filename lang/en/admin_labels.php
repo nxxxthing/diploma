@@ -25,7 +25,7 @@ return [
         'uk'     => 'Ukrainian',
         'ua'     => 'Ukrainian',
     ],
-    'hello'                         => 'Welcome to the Admin panel.',
+    'hello'                         => 'Welcome to the KPI Aspirant.',
     'title'                         => 'Name',
     'meta_title'                    => 'Meta Title',
     'meta_description'              => 'Meta Description',
@@ -236,4 +236,5 @@ return [
     'result' => 'Result',
     'comment' => 'Comment',
     'add_review' => 'Evaluate',
+    'download' => 'Download',
 ];

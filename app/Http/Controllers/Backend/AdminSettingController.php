@@ -14,11 +14,13 @@ class AdminSettingController extends Controller
 
     public function index()
     {
+        abort_unless(\Gate::allows($this->module.'_access'), 403);
         return view('admin.view.' . $this->module . '.index', $this->getViewData());
     }
 
     public function update(Request $request)
     {
+        abort_unless(\Gate::allows($this->module.'_access'), 403);
         $this->updateAdminTitle($request);
         $this->updateLogo($request);
         $this->saveUserMenu($request);
@@ -29,6 +31,7 @@ class AdminSettingController extends Controller
 
     public function setDefault()
     {
+        abort_unless(\Gate::allows($this->module.'_access'), 403);
         \DB::statement("UPDATE admin_settings
                               SET value = `default`, pure_value = `default_color`
                               WHERE status = true;");

@@ -25,7 +25,7 @@ return [
         'uk'     => 'Українська',
         'ua'     => 'Українська',
     ],
-    'hello'                         => 'Ласкаво просимо в Адмін-панель.',
+    'hello'                         => 'Ласкаво просимо в KPI Aspirant',
     'title'                         => 'Назва',
     'meta_title'                    => 'Meta Назва',
     'meta_description'              => 'Meta Опис',
@@ -238,4 +238,5 @@ return [
     'result' => 'Оцінка',
     'comment' => 'Коментар',
     'add_review' => 'Оцінити',
+    'download' => 'Завантажити',
 ];

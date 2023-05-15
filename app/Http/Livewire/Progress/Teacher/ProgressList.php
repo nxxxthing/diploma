@@ -42,6 +42,7 @@ class ProgressList extends Component implements Tables\Contracts\HasTable
 
             TextColumn::make('result')
                 ->sortable()
+                ->searchable()
                 ->formatStateUsing(fn ($state) => $state ?? __('admin_labels.not_reviewed'))
                 ->label(__('admin_labels.result')),
         ];
