@@ -31,6 +31,10 @@ class ProgressList extends Component implements Tables\Contracts\HasTable
             Tables\Columns\TextColumn::make('id')
                 ->hidden(auth('web')->user()->role?->slug != UserRoles::ADMIN->value),
 
+            TextColumn::make('student.full_name')
+                ->searchable(['first_name', 'last_name'])
+                ->label(__('admin_labels.student')),
+
             TextColumn::make('title')
                 ->searchable()
                 ->label(__('admin_labels.title')),

@@ -237,4 +237,5 @@ return [
     'comment' => 'Comment',
     'add_review' => 'Evaluate',
     'download' => 'Download',
+    'student' => 'Student',
 ];

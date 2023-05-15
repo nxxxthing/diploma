@@ -89,6 +89,8 @@ class ProgressForm extends Component implements HasForms
                                     ->required(fn (\Closure $get) => $get('type') == ProgressTypes::TEXT->value),
 
                                 FileUpload::make('image')
+                                    ->enableOpen()
+                                    ->enableDownload()
                                     ->label(__('admin_labels.image'))
                                     ->directory('uploads/images/progress')
                                     ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file): string {
@@ -102,6 +104,8 @@ class ProgressForm extends Component implements HasForms
                                     ->required(fn (\Closure $get) => $get('type') == ProgressTypes::IMAGE->value),
 
                                 FileUpload::make('file')
+                                    ->enableOpen()
+                                    ->enableDownload()
                                     ->label(__('admin_labels.file'))
                                     ->directory('uploads/files/progress')
                                     ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file): string {

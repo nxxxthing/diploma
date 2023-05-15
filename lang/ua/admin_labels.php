@@ -239,4 +239,5 @@ return [
     'comment' => 'Коментар',
     'add_review' => 'Оцінити',
     'download' => 'Завантажити',
+    'student' => 'Студент',
 ];
