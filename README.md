@@ -1,5 +1,7 @@
-# Laravel api template
-
+# Веб-додаток кабінету аспіранта
+Метою веб-додатку кабінету аспіранта є створення системи в якій студент
+зможе переглянути як розклад своєї групи, так і взаємодіяти із науковим
+керівником, шляхом відправлення частин своєї наукової роботи на оцінку.
 ## Run Locally
 
 Clone the project
@@ -55,19 +57,3 @@ Run server
 ```bash
   php artisan serve
 ```
-
-If it`s web project you need to install yaap/theme package
-
-```bash
-  composer require yaap/theme
-```
-
-And create default theme
-
-```bash
-  php artisan theme:create default
-```
-
-And init this in web routes (Theme::init('default');):
-
-![img.png](img.png)
