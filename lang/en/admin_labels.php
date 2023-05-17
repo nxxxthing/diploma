@@ -205,7 +205,7 @@ return [
     'teacher' => 'Teacher',
     'short_title' => 'Short title',
     'faculty_id' => 'Faculty',
-    'cathedra_id' => 'Chair',
+    'cathedra_id' => 'Cathedra',
     'lesson' => 'Lesson',
     'time' => 'Time',
     'week' => 'Week',
@@ -238,4 +238,5 @@ return [
     'add_review' => 'Evaluate',
     'download' => 'Download',
     'student' => 'Student',
+    'error_login' => 'These credentials do not match',
 ];

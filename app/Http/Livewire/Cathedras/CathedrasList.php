@@ -39,9 +39,18 @@ class CathedrasList extends Component implements Tables\Contracts\HasTable
 
             TextColumn::make('short_title')
                 ->searchable(query: function (Builder $query, string $search): Builder {
-                    return $query->whereTranslationLike('short_title', "%{$search}%");
+                    return $query->whereHas(
+                        'faculty',
+                        fn ($q) => $q->whereTranslationLike('short_title', "%{$search}%")
+                    );
                 })
                 ->label(__('admin_labels.short_title')),
+
+            TextColumn::make('faculty.short_title')
+                ->searchable(query: function (Builder $query, string $search): Builder {
+                    return $query->whereTranslationLike('short_title', "%{$search}%");
+                })
+                ->label(__('admin_labels.faculty_id')),
         ];
     }
 

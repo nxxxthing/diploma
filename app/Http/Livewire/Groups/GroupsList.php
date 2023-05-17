@@ -36,6 +36,27 @@ class GroupsList extends Component implements Tables\Contracts\HasTable
                     return $query->whereTranslationLike('title', "%{$search}%");
                 })
                 ->label(__('admin_labels.title')),
+
+            TextColumn::make('cathedra.short_title')
+                ->searchable(query: function (Builder $query, string $search): Builder {
+                    return $query->whereHas(
+                        'cathedra',
+                        fn ($q) => $q->whereTranslationLike('short_title', "%{$search}%")
+                    );
+                })
+                ->label(__('admin_labels.cathedra_id')),
+
+            TextColumn::make('cathedra.faculty.short_title')
+                ->searchable(query: function (Builder $query, string $search): Builder {
+                    return $query->whereHas(
+                        'cathedra',
+                        fn ($q) => $q->whereHas(
+                            'faculty',
+                            fn ($f) => $f->whereTranslationLike('short_title', "%{$search}%")
+                        )
+                    );
+                })
+                ->label(__('admin_labels.faculty_id')),
         ];
     }
 

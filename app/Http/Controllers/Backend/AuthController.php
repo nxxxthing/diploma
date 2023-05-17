@@ -33,7 +33,7 @@ class AuthController extends Controller
             ->with('role')->first();
 
         if (!$user) {
-            $errors = new MessageBag(['email' => ['These credentials do not match our records.']]);
+            $errors = new MessageBag(['email' => [__('admin_labels.error_login')]]);
 
             return Redirect::back()->withErrors($errors);
         }
@@ -50,7 +50,7 @@ class AuthController extends Controller
             return redirect('/');
         }
 
-        $errors = new MessageBag(['email' => ['These credentials do not match our records.']]);
+        $errors = new MessageBag(['email' => [__('admin_labels.error_login')]]);
 
         return Redirect::back()->withErrors($errors);
     }
